@@ -62,7 +62,7 @@ passport.deserializeUser(async (id, done) => {
 });
 
 /* ROUTES */
-app.get("/", (_req, res) => res.render("index"));
+app.get("/", (req, res) => res.render("index", { user: req.user }));
 
 app.post(
 	"/log-in",

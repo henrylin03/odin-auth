@@ -4,6 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 const pool = new Pool({
@@ -89,13 +90,15 @@ app.get("/log-out", (req, res, next) => {
 app.get("/sign-up", (_req, res) => res.render("sign-up-form"));
 app.post("/sign-up", async (req, res, next) => {
 	try {
+		const hashedPassword = await bcrypt.hash(req.body.password, 10);
 		await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [
 			req.body.username,
-			req.body.password,
+			hashedPassword,
 		]);
 		res.redirect("/");
-	} catch (err) {
-		return next(err);
+	} catch (error) {
+		console.error(error);
+		next(error);
 	}
 });
 

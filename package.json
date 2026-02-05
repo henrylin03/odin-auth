@@ -1,0 +1,21 @@
+{
+	"name": "odin-auth",
+	"main": "app.js",
+	"scripts": {
+		"dev": "node --watch app.js",
+		"seed-db": "node db/populatedb.js"
+	},
+	"author": "Henry Lin",
+	"license": "MIT",
+	"type": "commonjs",
+	"dependencies": {
+		"dotenv": "^17.2.3",
+		"ejs": "^4.0.1",
+		"express": "^5.2.1",
+		"pg": "^8.18.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.14",
+		"lefthook": "^2.1.0"
+	}
+}

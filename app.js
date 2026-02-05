@@ -61,8 +61,14 @@ passport.deserializeUser(async (id, done) => {
 	}
 });
 
+/* middleware to catch user details */
+app.use((req, res, next) => {
+	res.locals.currentUser = req.user;
+	next();
+});
+
 /* ROUTES */
-app.get("/", (req, res) => res.render("index", { user: req.user }));
+app.get("/", (_req, res) => res.render("index"));
 
 app.post(
 	"/log-in",
